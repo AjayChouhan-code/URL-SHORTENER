@@ -82,6 +82,21 @@ def redirect_to_url(short_url):
     else:
         return abort(404)
 
+@app.route('/metrics', methods=['GET'])
+def metrics():
+    """
+    GET /metrics
+    Returns the top 3 domain names that have been shortened the most.
+
+    Response JSON:
+    {
+        "youtube.com": 4,
+        "udemy.com": 3,
+        "wikipedia.org": 2
+    }
+    """
+    top_domains = url_service.get_top_domains()
+    return jsonify({domain: count for domain, count in top_domains})
 
 if __name__ == '__main__':
     """

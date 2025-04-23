@@ -70,4 +70,17 @@ class URLService:
         """
         parsed = urlparse(url)
         return parsed.netloc.replace("www.", "")
+    
+
+    def get_top_domains(self, n=3):
+        """
+        Returns the top N most frequently shortened domains.
+
+        Args:
+            n (int): Number of top domains to return. Defaults to 3.
+
+        Returns:
+            List[Tuple[str, int]]: List of tuples with domain and count.
+        """
+        return self.domain_counter.most_common(n)
 
